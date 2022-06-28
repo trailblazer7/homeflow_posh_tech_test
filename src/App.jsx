@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
+import Header from './Header';
 import PropertyCard from './PropertyCard';
-import SearchBox from './SearchBox';
 
 function App() {
   const [properties, setProperties] = useState();
@@ -18,13 +18,7 @@ function App() {
 
   return (
     <div className="container mx-auto my-5">
-      <header className="flex flex-col md:flex-row justify-between">
-        <h1 className="text-8xl">
-          Posh Properties
-        </h1>
-
-        <SearchBox />
-      </header>
+      <Header />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-5">
         {!!properties && properties.map((property) => <PropertyCard key={property.property_id} property={property} />)}
