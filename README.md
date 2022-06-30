@@ -8,7 +8,7 @@ Please complete the following three tasks:
 
 2. Not all of the properties in the data have photos, and these are currently displaying in the browser as broken images. Edit the code so if a property has no photos, a suitable placeholder is rendered instead.
 
-3. Each property card features a button with a yellow bookmark icon. Adjust the code so that clicking this button _saves_ the property and turns the icon red. Clicking the bookmark button again after a property is saved should _unsave_ it and return the icon colour to yellow. A user should be able to have multiple properties saved at a time.
+3. In the App component we have created a state array called `savedProperties`. Each property card features a button with a yellow bookmark icon. Adjust the code so that clicking this button _saves_ the property by adding it to the `savedProperties` array and turning the icon red. Clicking the bookmark button again after a property is saved should _unsave_ it, removing it from the `savedProperties` array and returning the icon colour to yellow. A user should be able to have multiple properties saved at a time.
 
 Once you have completed the test, please upload it to Github and send us a link to the repo. Good luck!
 
