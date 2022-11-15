@@ -1,3 +1,4 @@
+import React from 'react';
 import { FaBookmark } from 'react-icons/fa';
 
 function PropertyCard({ property }) {
