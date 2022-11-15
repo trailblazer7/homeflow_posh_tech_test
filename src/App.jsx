@@ -4,9 +4,10 @@ import PropertyCard from './PropertyCard';
 
 function App() {
   const [properties, setProperties] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
 
   // use this state to keep track of the user's saved/bookmarked properties
-  const [savedProperties, setSavedProperties] = useState([]);
+  const [savedPropertiesIds, setSavedPropertiesIds] = useState([]);
 
   useEffect(() => {
     const fetchPropertyData = async () => {
@@ -19,12 +20,43 @@ function App() {
     fetchPropertyData();
   }, []);
 
+  const toggleBookmark = (propertyId) => {
+    if(savedPropertiesIds.includes(propertyId)) {
+      setSavedPropertiesIds(savedPropertiesIds.filter(id => id !== propertyId))
+    } else {
+      setSavedPropertiesIds([
+        ...savedPropertiesIds,
+        propertyId
+      ])
+    }
+  }
+
+  const getFilteredProperties = () => {
+    const filterCallback = p => 
+      p.short_description 
+        ? p.short_description.toLowerCase().includes(
+            searchTerm.toLowerCase()
+          ) 
+        : false;
+
+    return searchTerm 
+      ? properties.filter(filterCallback) 
+      : properties;
+  }
+
   return (
     <div className="container mx-auto my-5">
-      <Header />
+      <Header setSearchTerm={setSearchTerm} />
 
       <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {!!properties && properties.map((property) => <PropertyCard key={property.property_id} property={property} />)}
+        {!!properties && getFilteredProperties().map((property) => 
+          <PropertyCard 
+            key={property.property_id} 
+            property={property} 
+            isBookmarked={savedPropertiesIds.includes(property.property_id)} 
+            toggleBookmark={toggleBookmark} 
+          />)
+          }
       </div>
     </div>
   );
